@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
 // Input => itemCount: number
@@ -19,7 +20,9 @@ class Pagination extends Component {
             <nav aria-label="Page navigation example">
                 <ul className="pagination">
                     { pages.map(page => 
-                        <li key={page} className={ page === currentPage ? 'page-item active' : 'page-item'}>
+                        <li 
+                            key={page} 
+                            className={ page === currentPage ? 'page-item active' : 'page-item'}>
                             <a onClick={() => onPageChange(page)} className="page-link">{page}</a>
                         </li>
                     )}
@@ -29,4 +32,11 @@ class Pagination extends Component {
     }
 }
  
+Pagination.propTypes = {
+    itemCount: PropTypes.number.isRequired, 
+    pageSize: PropTypes.number.isRequired, 
+    currentPage: PropTypes.number.isRequired,
+    onPageChange: PropTypes.func.isRequired 
+}
+
 export default Pagination;
