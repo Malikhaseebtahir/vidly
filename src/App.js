@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Movie from './components/movie.component';
+import Movies from './components/movies.component';
 
 function App() {
   return (
     <React.Fragment>
       <div className="container p-5">
-        <Movie/>
+        <Movies/>
       </div>
     </React.Fragment>
   );
