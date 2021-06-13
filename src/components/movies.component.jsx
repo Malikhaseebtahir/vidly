@@ -46,13 +46,11 @@ class Movies extends Component {
         this.setState({ sortColumn });
     }
 
-    render() { 
-        const { length: count } = this.state.movies;
+    getPagedData() {
         const { 
             currentPage, 
             pageSize, 
             movies: allMovies, 
-            genres, 
             selectedGenre,
             sortColumn } = this.state;
 
@@ -62,7 +60,19 @@ class Movies extends Component {
 
         const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
-        const movies = paginate(sorted, currentPage, pageSize)
+        const movies = paginate(sorted, currentPage, pageSize);
+        return { totalCount: filtered.length, movies };
+    }
+
+    render() { 
+        const { length: count } = this.state.movies;
+        const { 
+            currentPage, 
+            pageSize, 
+            genres, 
+            sortColumn } = this.state;
+
+        const { totalCount, movies } = this.getPagedData();
 
         if (count === 0) return <p>Sorry currently we have no movies</p>
         return (
@@ -75,7 +85,7 @@ class Movies extends Component {
                             onItemSelect={this.handleGenreSelection}/>                       
                     </div>
                     <div className="col-lg-9">
-                        <p>We have {filtered.length} movies available</p>
+                        <p>We have {totalCount} movies available</p>
                         <MoviesTable
                             movies={movies}
                             sortColumn={sortColumn}
@@ -84,7 +94,7 @@ class Movies extends Component {
                             onSort={this.handleSort}
                         />
                         <Pagination 
-                            itemCount={filtered.length} 
+                            itemCount={totalCount} 
                             pageSize={pageSize} 
                             currentPage={currentPage}
                             onPageChange={this.handlePageChange}/>                        
