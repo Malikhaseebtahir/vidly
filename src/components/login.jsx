@@ -49,7 +49,6 @@ class LoginForm extends Component {
     handleChange = ({ currentTarget: input }) => {
         const errors = {...this.state.errors };
         const errorMessage = this.validateProperty(input);
-        console.log(errorMessage);
         if (errorMessage) errors[input.name] = errorMessage;
         else delete errors[input.name];
 
@@ -79,7 +78,7 @@ class LoginForm extends Component {
                         onChange={this.handleChange}
                         error={errors.password}
                     />
-                    <button className="btn btn-primary">Login</button>
+                    <button disabled={this.validate()} className="btn btn-primary">Login</button>
                 </form>
             </div>
         );
