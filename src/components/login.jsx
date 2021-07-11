@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import joi from 'joi';
 import Input from './common/input';
 
 class LoginForm extends Component {
@@ -7,16 +8,21 @@ class LoginForm extends Component {
         errors: {}
     }
 
+    schema = joi.object({
+        username: joi.string().required().label('Username'),
+        password: joi.string().required().label('Password')
+    })
+
+
     validate = () => {
+        const result = this.schema.validate(this.state.account, {abortEarly: false});
+
         const errors = {};
+        if (!result.error) return;
 
-        const { account } = this.state;
-        if (account.username.trim() === '')
-            errors.username = "Username is required";
-        if (account.password.trim() === '')
-            errors.password = "Password is required";
+        result.error.details.map(error => errors[error.path[0]] = error.message);
 
-        return Object.keys(errors).length === 0 ? null : errors;
+        return errors;
     }
 
     handleLogin = e => {
@@ -31,17 +37,19 @@ class LoginForm extends Component {
     }
 
     validateProperty = ({ name, value }) => {
+        const obj = { [name]: value };
         if (name === 'username') {
-            if (value.trim() === '') return 'Username is required';
+            if (value.trim() === '') return 'Username is required'
         }
         if (name === 'password') {
-            if (value.trim() === '') return 'Username is required';
+            if (value.trim() === '') return 'Username is required'
         }
     }
 
     handleChange = ({ currentTarget: input }) => {
         const errors = {...this.state.errors };
         const errorMessage = this.validateProperty(input);
+        console.log(errorMessage);
         if (errorMessage) errors[input.name] = errorMessage;
         else delete errors[input.name];
 
@@ -50,7 +58,7 @@ class LoginForm extends Component {
         this.setState({ account, errors });
     }
 
-    render() { 
+    render() {
         const  { account, errors } = this.state;
 
         return (
@@ -77,5 +85,5 @@ class LoginForm extends Component {
         );
     }
 }
- 
+
 export default LoginForm;
