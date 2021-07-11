@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Input from './common/input';
 
 class LoginForm extends Component {
     state = {
@@ -6,9 +7,7 @@ class LoginForm extends Component {
     }
 
     handleLogin = e => {
-        console.log('e => ', e);
         e.preventDefault();
-
         console.log('Submit');
     }
 
@@ -25,27 +24,18 @@ class LoginForm extends Component {
             <div>
                 <h1>Login</h1>
                 <form onSubmit={this.handleLogin}>
-                    <div className="form-group">
-                        <label htmlFor="username">Username</label>
-                        <input 
-                            id="username" 
-                            type="text" 
-                            name="username"
-                            className="form-control"
-                            onChange={this.handleChange} 
-                            value={account.username} 
-                            autoFocus/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input 
-                            value={account.password}
-                            onChange={this.handleChange}
-                            id="password" 
-                            name="password"
-                            type="text" 
-                            className="form-control" />
-                    </div>
+                    <Input
+                        label="Username"
+                        name="username"
+                        value={account.username}
+                        onChange={this.handleChange}
+                    />
+                    <Input
+                        label="Password"
+                        name="password"
+                        value={account.password}
+                        onChange={this.handleChange}
+                    />
                     <button className="btn btn-primary">Login</button>
                 </form>
             </div>
