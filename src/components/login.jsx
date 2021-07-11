@@ -23,8 +23,7 @@ class LoginForm extends Component {
         e.preventDefault();
 
         const error = this.validate();
-        console.log(error);
-        this.setState({ error });
+        this.setState({ error: error || {} });
         if (error) return;
 
         // Call the server
@@ -49,12 +48,14 @@ class LoginForm extends Component {
                         name="username"
                         value={account.username}
                         onChange={this.handleChange}
+                        error={this.state.error.username}
                     />
                     <Input
                         label="Password"
                         name="password"
                         value={account.password}
                         onChange={this.handleChange}
+                        error={this.state.error.password}
                     />
                     <button className="btn btn-primary">Login</button>
                 </form>
