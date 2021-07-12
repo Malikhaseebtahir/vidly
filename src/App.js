@@ -6,7 +6,7 @@ import Rentals from './components/rentals';
 import Navbar from './components/navbar';
 import NotFound from './components/not-found';
 import MovieDetails from './components/movieDetails';
-import LoginForm from './components/login';
+import LoginForm from './components/loginForm';
 import './App.css';
 
 function App() {
