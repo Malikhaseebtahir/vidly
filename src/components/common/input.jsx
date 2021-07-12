@@ -3,17 +3,11 @@ import PropTypes from 'prop-types'
 
 // Input => label: string, name: string, value: string
 // Output => onChange : func
-const Input = ({ label, name, value, error, onChange }) => {
+const Input = ({ label, name, error, ...rest }) => {
     return ( 
         <div className="form-group">
             <label htmlFor={name}>{label}</label>
-            <input 
-                id={name} 
-                type="text" 
-                name={name}
-                className="form-control"
-                onChange={onChange} 
-                value={value}/>
+            <input {...rest} name={name} id={name} className="form-control" />
             { error && <div className="alert alert-danger">{error}</div>}
         </div>
     );
