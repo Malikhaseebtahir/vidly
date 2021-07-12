@@ -27,6 +27,9 @@ class Navbar extends Component {
                             <li className="nav-item">
                                 <NavLink className="nav-link" aria-current="page" to="/login">Login</NavLink>
                             </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" aria-current="page" to="/register">Register</NavLink>
+                            </li>
                         </ul>
                     </div>
                     </div>
