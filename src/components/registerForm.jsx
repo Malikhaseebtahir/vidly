@@ -1,50 +1,30 @@
 import React, { Component } from 'react';
+import joi from 'joi';
+import Form from './common/form';
 
-class Register extends Component {
+class Register extends Form {
     state = { 
-        account: { email: '', password: '', name: '' }
+        data: { email: '', password: '', name: '' },
+        errors: {}
     }
 
-    handleChange = ({ currentTarget: input }) => {
-        const account = { ...this.state.account };
-        account[input.name] = input.value;
-        this.setState({ account })
+    schema = joi.object({
+        email: joi.string().email({ tlds: { allow: false } }).required().label('Email'),
+        password: joi.string().min(3).max(5).required().label('Password'),
+        name: joi.string().required().label('Name')
+    });
+    
+    doSomething() {
+        console.log('submit');
     }
 
     render() { 
-        const { account } = this.state;
-        
         return ( 
-            <form>
-                <div className="form-group">
-                    <label htmlFor="">Email</label>
-                    <input 
-                        value={account.email} 
-                        name="email"
-                        type="text" 
-                        onChange={this.handleChange}
-                        className="form-control" 
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="">Password</label>
-                    <input 
-                        value={account.password}
-                        name="password"
-                        onChange={this.handleChange} 
-                        type="password" 
-                        className="form-control" />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="">Name</label>
-                    <input 
-                        value={account.name}
-                        name="name"
-                        onChange={this.handleChange}
-                        type="text" 
-                        className="form-control" />
-                </div>
-                <button className="btn btn-primary">Register</button>
+            <form onSubmit={this.handleSubmit}>
+                {this.renderInput('Email', 'email', 'email')}
+                {this.renderInput('Password', 'password', 'password')}
+                {this.renderInput('Name', 'name')}
+                {this.renderButton('Register')}
             </form>
         );
     }
