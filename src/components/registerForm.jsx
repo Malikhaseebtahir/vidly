@@ -10,7 +10,7 @@ class Register extends Form {
 
     schema = joi.object({
         email: joi.string().email({ tlds: { allow: false } }).required().label('Email'),
-        password: joi.string().min(3).max(5).required().label('Password'),
+        password: joi.string().min(5).required().label('Password'),
         name: joi.string().required().label('Name')
     });
     
