@@ -1,7 +1,10 @@
 import http from './httpService';
+import { apiUrl } from '../config.json';
+
+const apiEndpoints = apiUrl + '/movies';
 
 export function getMovies() {
-    return http.get('http://localhost:3900/api/movies');
+    return http.get(apiEndpoints);
 }
   
 // export function getMovie(id) {
@@ -24,7 +27,7 @@ export function getMovies() {
 //   }
 
 export function deleteMovie(id) {
-    return http.delete('http://localhost:3900/api/movies/' + id);
+    return http.delete(apiEndpoints + '/' + id);
     // let movieInDb = movies.find(m => m._id === id);
     // movies.splice(movies.indexOf(movieInDb), 1);
     // return movieInDb;
