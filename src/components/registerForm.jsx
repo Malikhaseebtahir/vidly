@@ -1,33 +1,45 @@
-import React, { Component } from 'react';
-import joi from 'joi';
-import Form from './common/form';
+import React from "react";
+import Joi from "joi-browser";
+import Form from "./common/form";
 
-class Register extends Form {
-    state = { 
-        data: { email: '', password: '', name: '' },
-        errors: {}
-    }
+class RegisterForm extends Form {
+  state = {
+    data: { username: "", password: "", name: "" },
+    errors: {}
+  };
 
-    schema = joi.object({
-        email: joi.string().email({ tlds: { allow: false } }).required().label('Email'),
-        password: joi.string().min(5).required().label('Password'),
-        name: joi.string().required().label('Name')
-    });
-    
-    doSomething() {
-        console.log('submit');
-    }
+  schema = {
+    username: Joi.string()
+      .required()
+      .email()
+      .label("Username"),
+    password: Joi.string()
+      .required()
+      .min(5)
+      .label("Password"),
+    name: Joi.string()
+      .required()
+      .label("Name")
+  };
 
-    render() { 
-        return ( 
-            <form onSubmit={this.handleSubmit}>
-                {this.renderInput('Email', 'email', 'email')}
-                {this.renderInput('Password', 'password', 'password')}
-                {this.renderInput('Name', 'name')}
-                {this.renderButton('Register')}
-            </form>
-        );
-    }
+  doSubmit = () => {
+    // Call the server
+    console.log("Submitted");
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Register</h1>
+        <form onSubmit={this.handleSubmit}>
+          {this.renderInput("username", "Username")}
+          {this.renderInput("password", "Password", "password")}
+          {this.renderInput("name", "Name")}
+          {this.renderButton("Register")}
+        </form>
+      </div>
+    );
+  }
 }
- 
-export default Register;
+
+export default RegisterForm;

@@ -1,30 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
 
-// Input => items: {},
-// Output => onItemSelect: func
-const ListGroup = ({ items,valueProperty, textProperty, selectedGenre, onItemSelect }) => {
-    return ( 
-        <ul className="list-group">
-            { items.map(item => 
-                <li 
-                    key={item[valueProperty]} 
-                    className={ selectedGenre === item ? 'list-group-item active' : 'list-group-item' }
-                    onClick={() => onItemSelect(item)}>
-                    {item[textProperty]}
-                </li>
-            )}
-        </ul> 
-    );
-}
+const ListGroup = ({
+  items,
+  textProperty,
+  valueProperty,
+  selectedItem,
+  onItemSelect
+}) => {
+  return (
+    <ul className="list-group">
+      {items.map(item => (
+        <li
+          onClick={() => onItemSelect(item)}
+          key={item[valueProperty]}
+          className={
+            item === selectedItem ? "list-group-item active" : "list-group-item"
+          }
+        >
+          {item[textProperty]}
+        </li>
+      ))}
+    </ul>
+  );
+};
 
 ListGroup.defaultProps = {
-    valueProperty: "_id",
-    textProperty: "name"
-}
+  textProperty: "name",
+  valueProperty: "_id"
+};
 
-ListGroup.propTypes = {
-    onItemSelect: PropTypes.func.isRequired
-}
- 
 export default ListGroup;

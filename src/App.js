@@ -1,36 +1,36 @@
-import React from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom';
-import Movies from './components/movies.component';
-import Customers from './components/customers';
-import Rentals from './components/rentals';
-import Navbar from './components/navbar';
-import NotFound from './components/not-found';
-import MovieDetails from './components/movieDetails';
-import LoginForm from './components/loginForm';
-import './App.css';
-import Register from './components/registerForm';
+import React, { Component } from "react";
+import { Route, Redirect, Switch } from "react-router-dom";
+import Movies from "./components/movies";
+import MovieForm from "./components/movieForm";
+import Customers from "./components/customers";
+import Rentals from "./components/rentals";
+import NotFound from "./components/notFound";
+import NavBar from "./components/navBar";
+import LoginForm from "./components/loginForm";
+import RegisterForm from "./components/registerForm";
+import "./App.css";
 
-function App() {
-  return (
-    <React.Fragment>
-      <div>
-        <Navbar/>
-        <main className="container p-5">
+class App extends Component {
+  render() {
+    return (
+      <React.Fragment>
+        <NavBar />
+        <main className="container">
           <Switch>
-            <Route path="/movies/:id" component={MovieDetails}/>
-            <Route path="/movies" component={Movies}/>
-            <Route path="/login" component={LoginForm}/>
-            <Route path="/register" component={Register}/>
-            <Route path="/customers" component={Customers}/>
-            <Route path="/rentals" component={Rentals}/>
-            <Route path="/not-found" component={NotFound}/>
-            <Redirect from="/" to="/movies" exact component={Movies}/>
-            <Redirect to="/not-found"/>
+            <Route path="/register" component={RegisterForm} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/movies/:id" component={MovieForm} />
+            <Route path="/movies" component={Movies} />
+            <Route path="/customers" component={Customers} />
+            <Route path="/rentals" component={Rentals} />
+            <Route path="/not-found" component={NotFound} />
+            <Redirect from="/" exact to="/movies" />
+            <Redirect to="/not-found" />
           </Switch>
         </main>
-      </div>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  }
 }
 
 export default App;
