@@ -1,5 +1,3 @@
-import Raven from "raven-js";
-
 function init() {
   // Raven.config("ADD YOUR OWN API KEY", {
   //   release: "1-0-0",
